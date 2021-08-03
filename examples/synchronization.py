@@ -1,23 +1,14 @@
 import os
 import sys
-# Our special branch of sciunit
-# sys.path.append("/Users/lakesare/Desktop/sciunit")
-sys.path.append('../')
 
 from netpyne import specs, sim
 import sciunit
 from netpyneunit.models import NetpyneModel
+from netpyneunit.models.backends import NetpyneBackend
 
-from contextlib import contextmanager
-@contextmanager
-def suppress_stdout():
-  with open(os.devnull, "w") as devnull:
-    old_stdout = sys.stdout
-    sys.stdout = devnull
-    try:  
-      yield
-    finally:
-      sys.stdout = old_stdout
+import logging
+# (The default logging level in NetPyNE is logging.INFO)
+logging.getLogger('netpyne').setLevel(logging.WARNING)
 
 class ProducesSyncMeasure(sciunit.Capability): 
   def produce_sync_measure(self):
@@ -126,7 +117,7 @@ class NeuromodulatorModel(NetpyneModel,
       'duration': .5*1e3,
       'dt': 0.025,
       'seeds': {'conn': 1, 'stim': 1, 'loc': 1},
-      'verbose': False,
+      'timing': False,
       'hParams': {'v_init': -75},
       'recordCells': [],
       'recordTraces': {'Vsoma': {'sec': 'soma', 'loc': 0.5, 'var': 'v'}},

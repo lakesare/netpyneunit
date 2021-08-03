@@ -3,18 +3,6 @@ import sys
 from netpyne import sim
 from sciunit.models.backends import Backend
 
-from contextlib import contextmanager
-@contextmanager
-def suppress_stdout():
-  with open(os.devnull, "w") as devnull:
-    old_stdout = sys.stdout
-    sys.stdout = devnull
-    try:  
-      yield
-    finally:
-      sys.stdout = old_stdout
-
-
 class NetpyneBackend(Backend):
   # From sim.load()
   def cache_to_results(self, cache):
@@ -67,13 +55,11 @@ class NetpyneBackend(Backend):
   def _backend_run(self):
     # Populates .allCells and .allPops,
     # makes sure .modifyConns() affects the `net` dictionary
-    with suppress_stdout():
-      sim.gatherData()
+    sim.gatherData()
 
     sim_hash = self.get_sim_hash()
     self.model.set_run_params(sim_hash=sim_hash)
 
-    with suppress_stdout():
-      sim.runSim()
-      sim.gatherData()
+    sim.runSim()
+    sim.gatherData()
     return sim
