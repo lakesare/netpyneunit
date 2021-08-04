@@ -6,13 +6,17 @@ from sciunit.models.backends import Backend
 class NetpyneBackend(Backend):
   # From sim.load()
   def cache_to_results(self, cache):
+    # BOTH of these make the first successful run after the cache fetch fail!
+    # Test with [gaba_test, gaba_test_2, gaba_test_3]
+    # Should fail with the NEURON error.
+    #
     # Create network object and set cfg and net params
-    sim.initialize()
+    # sim.initialize()
+    # sim.loadSimCfg( None, data=cache)
 
-    sim.loadSimCfg( None, data=cache)
     sim.loadSimData(None, data=cache)
-    # I think we only need loadSimCfg() and loadSimData().
-    # However, some analysis utils (or graphs) might requires these two too.
+    # # I think we only need loadSimCfg() and loadSimData().
+    # # However, some analysis utils (or graphs) might requires these two too.
     sim.loadNetParams(None, data=cache)
     sim.loadNet(      None, data=cache, instantiate=False, compactConnFormat=sim.cfg.compactConnFormat)
 
@@ -37,7 +41,8 @@ class NetpyneBackend(Backend):
     if 'LFP' in cache['simData']['allSimData']:
       cache['simData']['allSimData']['LFP'] = cache['simData']['allSimData']['LFP'].tolist()
 
-    cache = sim.replaceDictODict(cache)
+    # This line changes the first result (remember the colab bug)
+    # cache = sim.replaceDictODict(cache)
 
     return cache
 
@@ -52,14 +57,22 @@ class NetpyneBackend(Backend):
 
     return net
 
-  def _backend_run(self):
+  # This may not be the best place to .set_run_params -
+  # For example, self.print_run_params won't print them out.
+  # However, the only other option is moving the get_sim_hash() generation
+  # to the model, which I wouldn't very much like, I enjoy having all caching-related functionality in one place.
+  def backend_run(self):
     # Populates .allCells and .allPops,
     # makes sure .modifyConns() affects the `net` dictionary
     sim.gatherData()
 
+    print('Setting run_params=sim_hash')
     sim_hash = self.get_sim_hash()
     self.model.set_run_params(sim_hash=sim_hash)
 
+    super().backend_run()
+
+  def _backend_run(self):
     sim.runSim()
     sim.gatherData()
     return sim
