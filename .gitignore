@@ -1,5 +1,5 @@
-examples/x86_64
-examples/data
+examples/**/x86_64
+examples/**/data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

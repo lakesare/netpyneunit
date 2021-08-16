@@ -1,33 +1,23 @@
-import os
-import sys
-
 from netpyne import specs, sim
 from neuron import h
 import sciunit
 from netpyneunit.models import NetpyneModel
 from netpyneunit.models.backends import NetpyneBackend
 import numpy as np
-import matplotlib; matplotlib.use('Agg')  # to avoid graphics error in servers
 
-import logging
-# (The default logging level in NetPyNE is logging.INFO)
-# logging.getLogger('netpyne').setLevel(logging.WARNING)
-
-class ProducesMeanFiringRate(sciunit.Capability): 
-  def produce_mean_firing_rate(self):
-    self.unimplemented()
+from capabilities import ProducesMeanFiringRate
 
 from sciunit.models.backends import register_backends
 register_backends({"Netpyne": NetpyneBackend})
 
 class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
 
-  def __init__(self, scale, name, ext_input):
+  def __init__(self, scale, name, ext_input, duration=60*1e3):
     super().__init__(name=name, backend=("Netpyne", { "use_memory_cache": False, "use_disk_cache": False }))
     self.initSim(scale, ext_input)
 
-  def initSim(self, scale, ext_input):
-    cfg = self.getSimConfig(scale, ext_input)
+  def initSim(self, scale, ext_input, duration):
+    cfg = self.getSimConfig(scale, ext_input, duration)
     netParams = self.getNetParams(cfg)
 
     sim.initialize(simConfig=cfg, netParams=netParams)
@@ -41,11 +31,11 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
         rand.Random123(c.gid, cfg.seeds['m'])
         c.hPointp.m = rand.normal(-58,10)
 
-  def getSimConfig(self, scale, ext_input):
+  def getSimConfig(self, scale, ext_input, duration):
     cfg = specs.SimConfig()
 
     cfg.seeds['stim'] = 0
-    cfg.duration = 1*1e3 #60*1e3
+    cfg.duration = duration
     cfg.dt = 0.025
     cfg.seeds['m'] = 0
     cfg.printPopAvgRates = False # Still prints?
@@ -53,18 +43,17 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
 
     ### Options to save memory in large-scale ismulations
     cfg.gatherOnlySimData = False
-    cfg.saveCellSecs=False
-    cfg.saveCellConns=False
-    cfg.createPyStruct = False
+    cfg.saveCellSecs      = False
+    cfg.saveCellConns     = False
+    cfg.createPyStruct    = False
 
     # DC=True ; TH=False; Balanced=True  => Reproduce Figure 7 A1 and A2
     # DC=False; TH=False; Balanced=False => Reproduce Figure 7 B1 and B2
     # DC=False; TH=False; Balanced=True  => Reproduce Figure 8 A, B, C and D
     # DC=False; TH=False; Balanced=True and run to 60 s => Table 6 
-    # DC=False; TH=True;  Balanced=True => Figure 10A. But I want a partial reproduce so I guess Figure 10C is not necessary
+    # DC=False; TH=True;  Balanced=True  => Figure 10A. But I want a partial reproduce so I guess Figure 10C is not necessary
 
-    # Size of Network. Adjust this constants, please!
-    cfg.ScaleFactor = scale #1.0 # 1.0 = 80.000 
+    cfg.ScaleFactor = scale
 
     if (ext_input == 'balanced_poisson'):
       cfg.DC = False
@@ -94,21 +83,21 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
     cfg.recordCellsSpikes = ['L2e', 'L2i', 'L4e', 'L4i', 'L5e', 'L5i','L6e', 'L6i'] # record only spikes of cells (not ext stims)
 
     # raster plot (include update in netParams.py)
-    '''
-    cfg.analysis['plotRaster']={'include': [], 'timeRange': [100,600], 'popRates' : False, 'figSize' : (6,7),  
-      'labels':'overlay', 'orderInverse': True, 'fontSize':16, 'showFig':False, 'saveFig': True, 'saveData':True}
-    # raster plot (include update in netParams.py)
-    '''
-    # cfg.analysis['plotRaster']={'include': [], 'timeRange': [100,cfg.duration], 'popRates' : False, 'figSize' : (6,7),  
-    #   'labels':'overlay', 'orderInverse': True, 'fontSize':16, 'showFig':False, 'saveFig': True, 'saveData':True}
+    cfg.analysis['plotRaster'] = {
+      # cfg.duration used to be simply '600' in a copypasted comment
+      'include': [], 'timeRange': [100, cfg.duration], 'popRates' : False, 'figSize': (6,7),
+      'labels':'overlay', 'orderInverse': True, 'fontSize':16, 'showFig':False, 'saveFig': True, 'saveData':True
+    }
 
     # statistics plot (include update in netParams.py)
-    cfg.analysis['plotSpikeStats'] = {'include' : cfg.recordCellsSpikes, 'stats' : ['rate','isicv'], 'legendLabels': cfg.recordCellsSpikes,
-      'timeRange' : [100,cfg.duration], 'fontSize': 16, 'figSize': (6,9),'showFig': False, 'saveFig': True, 'saveData': True}
+    cfg.analysis['plotSpikeStats'] = {
+      'include': cfg.recordCellsSpikes, 'stats': ['rate','isicv'], 'legendLabels': cfg.recordCellsSpikes,
+      'timeRange': [100,cfg.duration], 'fontSize': 16, 'figSize': (6,9),'showFig': False, 'saveFig': True, 'saveData': True
+    }
 
     # plot traces
-    #cfg.recordTraces = {'m': {'var': 'm', 'conds':{'pop': ['L2e', 'L2i']}}}
-    #cfg.analysis['plotTraces'] = {'include':[('L2e', [0, 1, 2, 3]),('L2i', [0, 1])], 'timeRange': [0,100],'overlay': True,'oneFigPer': 'trace', 'showFig':False, 'saveFig': 'traceEscala3'+str(ScaleFactor)+'.png'}
+    cfg.recordTraces = {'m': {'var': 'm', 'conds':{'pop': ['L2e', 'L2i']}}}
+    cfg.analysis['plotTraces'] = {'include':[('L2e', [0, 1, 2, 3]),('L2i', [0, 1])], 'timeRange': [0,100],'overlay': True,'oneFigPer': 'trace', 'showFig':False, 'saveFig': 'traceEscala3'+str(ScaleFactor)+'.png'}
     return cfg
 
   def getNetParams(self, cfg):
@@ -326,59 +315,4 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
 
   def produce_mean_firing_rate(self):
     return sim.analysis.popAvgRates()
-
-
-class MyScore(sciunit.scores.RelativeDifferenceScore):
-  def __str__(self):
-    return f"{self.prediction[self.observation['layer']]:.2f} ({self.score * 100:.2f}%)"
-
-class PopulationMeanFiringRateTest(sciunit.Test):
-  required_capabilities = (ProducesMeanFiringRate, )
-  score_type = MyScore
-
-  def generate_prediction(self, model):
-    model.run() 
-    return model.produce_mean_firing_rate()
-
-  def compute_score(self, observation, prediction):
-    pred = prediction[observation['layer']]
-    obs = observation['value']
-
-    score = MyScore.compute(obs, pred, scale=obs)
-    return score
-
-# model_1 = PdcmModel(scale=0.01, name="1%", ext_input="balanced_poisson")
-# model_2 = PdcmModel(scale=0.02, name="2%", ext_input="balanced_poisson")
-
-# pmfr_L2e = PopulationMeanFiringRateTest({ 'value': 0.90, 'layer': 'L2e' }, name='L2e')
-# pmfr_L2i = PopulationMeanFiringRateTest({ 'value': 2.80, 'layer': 'L2i' }, name='L2i')
-# pmfr_L4e = PopulationMeanFiringRateTest({ 'value': 4.39, 'layer': 'L4e' }, name='L4e')
-# pmfr_L4i = PopulationMeanFiringRateTest({ 'value': 5.70, 'layer': 'L4i' }, name='L4i')
-# pmfr_L5e = PopulationMeanFiringRateTest({ 'value': 6.80, 'layer': 'L5e' }, name='L5e')
-# pmfr_L5i = PopulationMeanFiringRateTest({ 'value': 8.22, 'layer': 'L5i' }, name='L5i')
-# pmfr_L6e = PopulationMeanFiringRateTest({ 'value': 1.14, 'layer': 'L6e' }, name='L6e')
-# pmfr_L6i = PopulationMeanFiringRateTest({ 'value': 7.60, 'layer': 'L6i' }, name='L6i')
-
-# table_a1_suite = sciunit.TestSuite(
-#   [pmfr_L2e],
-#   # [pmfr_L2e, pmfr_L2i, pmfr_L4e, pmfr_L4i, pmfr_L5e, pmfr_L5i, pmfr_L6e, pmfr_L6i],
-#   name="Population Mean Firing Rate: Balanced Poisson"
-# )
-# table_a1 = table_a1_suite.judge([model_2, model_1])
-# print(table_a1)
-
-
-model_1 = PdcmModel(scale=0.1, name="10%", ext_input="balanced_dc")
-
-pmfr_L2e = PopulationMeanFiringRateTest({ 'value': 0.87, 'layer': 'L2e' }, name='L2e')
-
-table_a2_suite = sciunit.TestSuite(
-  [pmfr_L2e],
-  # [pmfr_L2e, pmfr_L2i, pmfr_L4e, pmfr_L4i, pmfr_L5e, pmfr_L5i, pmfr_L6e, pmfr_L6i],
-  name="Population Mean Firing Rate: Direct Current"
-)
-table_a2 = table_a2_suite.judge([model_1])
-print(table_a2)
-
-
 
