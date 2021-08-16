@@ -14,7 +14,7 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
 
   def __init__(self, scale, name, ext_input, duration=60*1e3):
     super().__init__(name=name, backend=("Netpyne", { "use_memory_cache": False, "use_disk_cache": False }))
-    self.initSim(scale, ext_input)
+    self.initSim(scale, ext_input, duration)
 
   def initSim(self, scale, ext_input, duration):
     cfg = self.getSimConfig(scale, ext_input, duration)
@@ -83,11 +83,11 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
     cfg.recordCellsSpikes = ['L2e', 'L2i', 'L4e', 'L4i', 'L5e', 'L5i','L6e', 'L6i'] # record only spikes of cells (not ext stims)
 
     # raster plot (include update in netParams.py)
-    cfg.analysis['plotRaster'] = {
-      # cfg.duration used to be simply '600' in a copypasted comment
-      'include': [], 'timeRange': [100, cfg.duration], 'popRates' : False, 'figSize': (6,7),
-      'labels':'overlay', 'orderInverse': True, 'fontSize':16, 'showFig':False, 'saveFig': True, 'saveData':True
-    }
+    # cfg.analysis['plotRaster'] = {
+    #   # cfg.duration used to be simply '600' in a copypasted comment
+    #   'include': [], 'timeRange': [100, cfg.duration], 'popRates' : False, 'figSize': (6,7),
+    #   'labels':'overlay', 'orderInverse': True, 'fontSize':16, 'showFig':False, 'saveFig': True, 'saveData':True
+    # }
 
     # statistics plot (include update in netParams.py)
     cfg.analysis['plotSpikeStats'] = {
@@ -96,8 +96,8 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
     }
 
     # plot traces
-    cfg.recordTraces = {'m': {'var': 'm', 'conds':{'pop': ['L2e', 'L2i']}}}
-    cfg.analysis['plotTraces'] = {'include':[('L2e', [0, 1, 2, 3]),('L2i', [0, 1])], 'timeRange': [0,100],'overlay': True,'oneFigPer': 'trace', 'showFig':False, 'saveFig': 'traceEscala3'+str(ScaleFactor)+'.png'}
+    # cfg.recordTraces = {'m': {'var': 'm', 'conds':{'pop': ['L2e', 'L2i']}}}
+    # cfg.analysis['plotTraces'] = {'include':[('L2e', [0, 1, 2, 3]),('L2i', [0, 1])], 'timeRange': [0,100],'overlay': True,'oneFigPer': 'trace', 'showFig':False, 'saveFig': 'traceEscala3'+str(cfg.ScaleFactor)+'.png'}
     return cfg
 
   def getNetParams(self, cfg):
