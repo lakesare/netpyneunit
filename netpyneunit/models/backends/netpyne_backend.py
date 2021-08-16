@@ -64,6 +64,9 @@ class NetpyneBackend(Backend):
   def backend_run(self):
     # Populates .allCells and .allPops,
     # makes sure .modifyConns() affects the `net` dictionary
+    #
+    # Attention: sim.gatherData() clears sim.analysis.popAvgRates()! (we don't want this to happen)
+    #
     sim.gatherData()
 
     print('Setting run_params=sim_hash')
@@ -73,6 +76,24 @@ class NetpyneBackend(Backend):
     super().backend_run()
 
   def _backend_run(self):
+    # Identical to sim.create():
+    #
+    # 1. We leave these up to the user:
+    # sim.initialize(netParams, simConfig)
+    # sim.net.createPops()
+    # sim.net.createCells()
+    #
+    # 2. And we run these ourselves, because we need to run these every time to get the proper analysis.
+    sim.net.connectCells()
+    sim.net.addStims()
+    sim.net.addRxD()
+    sim.setupRecording()
+
+    # Identical to sim.simulate():
     sim.runSim()
     sim.gatherData()
+
+    # Identical to sim.analyze():
+    sim.saveData()
+    sim.analysis.plotData()
     return sim
