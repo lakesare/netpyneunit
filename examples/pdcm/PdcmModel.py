@@ -1,12 +1,9 @@
 from netpyne import specs, sim
 from neuron import h
-import sciunit
 from netpyneunit.models import NetpyneModel
 from netpyneunit.models.backends import NetpyneBackend
 import numpy as np
-
 from capabilities import ProducesMeanFiringRate
-
 from sciunit.models.backends import register_backends
 register_backends({"Netpyne": NetpyneBackend})
 
@@ -27,7 +24,6 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
     sim.net.createCells()
 
     # randomize m parameter of cells
-    from neuron import h
     rand = h.Random()
     for c in sim.net.cells:
       if c.tags['cellModel'] == 'IntFire_PD':

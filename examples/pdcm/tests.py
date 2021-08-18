@@ -1,19 +1,13 @@
-from netpyne import specs, sim
-from neuron import h
 import sciunit
-from netpyneunit.models import NetpyneModel
-from netpyneunit.models.backends import NetpyneBackend
-import numpy as np
-
 from capabilities import ProducesMeanFiringRate
 
-class MyScore(sciunit.scores.RelativeDifferenceScore):
+class MyRelativeDifferenceScore(sciunit.scores.RelativeDifferenceScore):
   def __str__(self):
     return f"{self.prediction[self.observation['layer']]:.2f} ({self.score * 100:.2f}%)"
 
 class PopulationMeanFiringRateTest(sciunit.Test):
   required_capabilities = (ProducesMeanFiringRate, )
-  score_type = MyScore
+  score_type = MyRelativeDifferenceScore
 
   def generate_prediction(self, model):
     model.run() 
@@ -23,5 +17,5 @@ class PopulationMeanFiringRateTest(sciunit.Test):
     pred = prediction[observation['layer']]
     obs = observation['value']
 
-    score = MyScore.compute(obs, pred, scale=obs)
+    score = MyRelativeDifferenceScore.compute(obs, pred, scale=obs)
     return score

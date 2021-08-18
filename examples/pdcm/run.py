@@ -1,19 +1,10 @@
-from netpyne import specs, sim
-from neuron import h
 import sciunit
-from netpyneunit.models import NetpyneModel
-from netpyneunit.models.backends import NetpyneBackend
-import numpy as np
-
-# to avoid graphics error in servers
-import matplotlib
-matplotlib.use('Agg')
-
-import logging
-logging.getLogger('netpyne').setLevel(logging.WARNING)
-
 from PdcmModel import PdcmModel
 from tests import PopulationMeanFiringRateTest
+
+import logging
+# This relies on https://github.com/Neurosim-lab/netpyne/pull/623.
+logging.getLogger('netpyne').setLevel(logging.WARNING)
 
 def table_a1():
   model_80 = PdcmModel(name="80%", scale=0.8, ext_input="balanced_poisson")
@@ -73,25 +64,19 @@ def table_a2():
   print(table)
 
 def caching():
-  # A single model, and 2 tests should be good.
-
   model_1  = PdcmModel(scale=0.01, name="1%", ext_input="balanced_poisson", duration=1*1e3)
+  model_05 = PdcmModel(scale=0.005, name="0.5%", ext_input="balanced_poisson", duration=1*1e3)
 
   test_L2e = PopulationMeanFiringRateTest({ 'value': 0.90, 'layer': 'L2e' }, name='L2e')
   test_L2i = PopulationMeanFiringRateTest({ 'value': 2.80, 'layer': 'L2i' }, name='L2i')
+  test_L4e = PopulationMeanFiringRateTest({ 'value': 4.39, 'layer': 'L4e' }, name='L4e')
 
   suite = sciunit.TestSuite(
-    [test_L2e],
+    [test_L2e, test_L2i, test_L4e],
     name="Population Mean Firing Rate: Balanced Poisson"
   )
-  table = suite.judge([model_1])
+  table = suite.judge([model_1, model_05, model_1])
   print(table)
 
 # Let's play with caching.
 caching()
-
-
-
-
-
-
