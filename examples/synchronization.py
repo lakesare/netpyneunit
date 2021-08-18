@@ -38,8 +38,7 @@ class NeuromodulatorModel(NetpyneModel,
   default_gaba_weight = 0.005
 
   def __init__(self):
-    super().__init__(name="Neuromodulator Model", backend=("Netpyne", { "use_memory_cache": True, "use_disk_cache": False }))
-    self.initSim()
+    super().__init__(name="Neuromodulator Model", backend=("Netpyne", { "use_memory_cache": False, "use_disk_cache": False }))
 
   def initSim(self):
     netParams=specs.NetParams()
@@ -143,8 +142,9 @@ class NeuromodulatorModel(NetpyneModel,
     simConfig.recordStim = True  # record spikes of cell stims
     simConfig.recordStep = 0.1 # Step size in ms to save data (eg. V traces, LFP, etc)
 
-    sim.create(netParams=netParams, simConfig=simConfig)
-
+    sim.initialize(netParams=netParams, simConfig=simConfig)
+    sim.net.createPops()
+    sim.net.createCells()
 
   def produce_sync_measure(self):
     return sim.analysis.syncMeasure()

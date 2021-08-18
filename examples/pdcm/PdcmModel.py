@@ -12,30 +12,33 @@ register_backends({"Netpyne": NetpyneBackend})
 
 class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
 
-  def __init__(self, scale, name, ext_input, duration=60*1e3):
-    super().__init__(name=name, backend=("Netpyne", { "use_memory_cache": False, "use_disk_cache": False }))
-    self.initSim(scale, ext_input, duration)
+  def __init__(self, name, scale, ext_input, duration=60*1e3):
+    super().__init__(name=name, backend=("Netpyne", { "use_memory_cache": True, "use_disk_cache": False }))
+    self.scale     = scale
+    self.ext_input = ext_input
+    self.duration  = duration
 
-  def initSim(self, scale, ext_input, duration):
-    cfg = self.getSimConfig(scale, ext_input, duration)
+  def initSim(self):
+    cfg = self.getSimConfig()
     netParams = self.getNetParams(cfg)
-
     sim.initialize(simConfig=cfg, netParams=netParams)
+
     sim.net.createPops()
     sim.net.createCells()
 
     # randomize m parameter of cells
-    rand=h.Random()
+    from neuron import h
+    rand = h.Random()
     for c in sim.net.cells:
       if c.tags['cellModel'] == 'IntFire_PD':
-        rand.Random123(c.gid, cfg.seeds['m'])
+        rand.Random123(c.gid, sim.cfg.seeds['m'])
         c.hPointp.m = rand.normal(-58,10)
 
-  def getSimConfig(self, scale, ext_input, duration):
+  def getSimConfig(self):
     cfg = specs.SimConfig()
 
     cfg.seeds['stim'] = 0
-    cfg.duration = duration
+    cfg.duration = self.duration
     cfg.dt = 0.025
     cfg.seeds['m'] = 0
     cfg.printPopAvgRates = False # Still prints?
@@ -53,17 +56,19 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
     # DC=False; TH=False; Balanced=True and run to 60 s => Table 6 
     # DC=False; TH=True;  Balanced=True  => Figure 10A. But I want a partial reproduce so I guess Figure 10C is not necessary
 
-    cfg.ScaleFactor = scale
+    cfg.ScaleFactor = self.scale
 
-    if (ext_input == 'balanced_poisson'):
+    if (self.ext_input == 'balanced_poisson'):
       cfg.DC = False
       cfg.Balanced = True
-    elif (ext_input == 'balanced_dc'):
+    elif (self.ext_input == 'balanced_dc'):
       cfg.DC = True
       cfg.Balanced = True
-    elif (ext_input == 'unbalanced_poisson'):
+    elif (self.ext_input == 'unbalanced_poisson'):
       cfg.DC = False
       cfg.Balanced = False
+    else:
+      raise ValueError(f'ext_input should be not be "{self.ext_input}".')
 
     # Thalamic input in 4th and 6th layer on or off
     cfg.TH = False #True = on // False = off
