@@ -316,4 +316,3 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
 
   def produce_mean_firing_rate(self):
     return sim.analysis.popAvgRates()
-
