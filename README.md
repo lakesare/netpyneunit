@@ -58,8 +58,12 @@ We should create a **custom jsonpickle handler** (place it along our other handl
 
 #### 2. Decide what to do with sim.net.modifyConns()
 
-Slavador raised the concern that calculating the model hash with `sim.net.allPops` and `sim.net.allCells` might be a bad idea - what if we have 80k cells, will this perform reasonably well?
+Salvador raised the concern that calculating the model hash with `sim.net.allPops` and `sim.net.allCells` might be a bad idea - what if we have 80k cells, will this perform reasonably well?
 Further more, if we have randomization, `allCells`  might be catching the attributes we don't want to cache.
+
+#### 3. Walk through `sim.load()` and `sim.saveData()`
+
+Walk through **NetPyNE**'s `sim.load()` and `sim.saveData()` to make sure that **NetpyneUnit**'s' `cache_to_results` and `results_to_cache()` aren't missing any code of importance.
 
 ### Logging
 
