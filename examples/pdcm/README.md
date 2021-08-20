@@ -17,4 +17,4 @@ ___
 
 To compile mod files: `nrnivmodl`  
 To run on single core: `python3 run.py`  
-To run on multiple cores: `mpiexec -n 2 nrniv -python -mpi init.py`
+To run on multiple cores: `mpiexec -n 2 nrniv -python -mpi run.py`
