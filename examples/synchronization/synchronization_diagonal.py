@@ -138,6 +138,6 @@ nmda_test = SynchronyTest({'value': 0.808}, name="nmda")
 # Synchronization increases (from the default), as it should
 gaba_test = SynchronyTest({'value': 0.954}, name="gaba")
 
-neuromodulators_suite = sciunit.TestSuite([default_test, gaba_test, nmda_test], name="Neuromodulators test suite")
-score_matrix = neuromodulators_suite.judge([model_by_default, model_with_gaba_agonist, model_with_nmda_antagonist])
+neuromodulators_suite = sciunit.TestSuite([default_test, nmda_test, gaba_test], name="Neuromodulators test suite")
+score_matrix = neuromodulators_suite.judge([model_by_default, model_with_nmda_antagonist, model_with_gaba_agonist])
 print(score_matrix)
