@@ -1,10 +1,8 @@
-
 # NetpyneUnit: SciUnit Tests for NetPyNE Models
-
 
 ## Getting started
 
-1. `pip install sciunit netpyne`  
+1. `pip install sciunit netpyne neuron`  
 2. `cd netpyneunit`
 3. `pip install -e .` (this will install **NetpyneUnit** locally as if it's a real remote package, and you'll be able to import it from anywhere)
 4. `python examples/synchronization/synchronization_diagonal.py`

@@ -63,20 +63,37 @@ def table_a2():
   )
   print(table)
 
-def caching():
-  model_1  = PdcmModel(scale=0.01, name="1%", ext_input="balanced_poisson", duration=1*1e3)
-  model_05 = PdcmModel(scale=0.005, name="0.5%", ext_input="balanced_poisson", duration=1*1e3)
+def fast_example_please():
+  model_2  = PdcmModel(name="2%", scale=0.02, ext_input="balanced_poisson", duration=1*1e3)
+  model_1  = PdcmModel(name="1%", scale=0.01, ext_input="balanced_poisson", duration=1*1e3)
 
   test_L2e = PopulationMeanFiringRateTest({ 'value': 0.90, 'layer': 'L2e' }, name='L2e')
   test_L2i = PopulationMeanFiringRateTest({ 'value': 2.80, 'layer': 'L2i' }, name='L2i')
   test_L4e = PopulationMeanFiringRateTest({ 'value': 4.39, 'layer': 'L4e' }, name='L4e')
+  test_L4i = PopulationMeanFiringRateTest({ 'value': 5.70, 'layer': 'L4i' }, name='L4i')
+  test_L5e = PopulationMeanFiringRateTest({ 'value': 6.80, 'layer': 'L5e' }, name='L5e')
+  test_L5i = PopulationMeanFiringRateTest({ 'value': 8.22, 'layer': 'L5i' }, name='L5i')
+  test_L6e = PopulationMeanFiringRateTest({ 'value': 1.14, 'layer': 'L6e' }, name='L6e')
+  test_L6i = PopulationMeanFiringRateTest({ 'value': 7.60, 'layer': 'L6i' }, name='L6i')
 
   suite = sciunit.TestSuite(
-    [test_L2e, test_L2i, test_L4e],
+    [test_L2e, test_L2i, test_L4e, test_L4i, test_L5e, test_L5i, test_L6e, test_L6i],
     name="Population Mean Firing Rate: Balanced Poisson"
   )
-  table = suite.judge([model_1, model_05, model_1])
+  table = suite.judge(
+    [model_2, model_1]
+  )
   print(table)
 
-# Let's play with caching.
-caching()
+# A quick reproduction of the table_a1 for 1% and 2% models
+# Unlike Table A1, however, this uses duration=1*1e3 instead of duration=60*1e3 to save the time.
+fast_example_please()
+
+# Comment out these lines if you'd like a full reproduction of the PDCM paper.
+# Careful, this might take many hours to run!
+# (E.g., on a single core
+# the 1% PDCM model runs for a couple of seconds, while
+# the 10% PDCM model runs for 10 minutes)
+#
+# table_a1()
+# table_a2()
