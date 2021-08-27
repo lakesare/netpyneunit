@@ -1,5 +1,9 @@
 # NetpyneUnit: SciUnit Tests for NetPyNE Models
 
+## Overview
+
+Check out [google colab](https://colab.research.google.com/github/lakesare/netpyneunit/blob/main/docs/PDCM_example.ipynb) to see **NetpyneUnit** in action.
+
 ## Getting started
 
 1. `pip install sciunit netpyne neuron`  
