@@ -7,7 +7,7 @@
   <img alt="GitHub" src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square">
   <img alt="GitHub" src="https://img.shields.io/github/issues/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://img.shields.io/github/issues-closed/lakesare/netpyneunit.svg">
-  <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/lakesare/netpyneunit.svg">
+  <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/russelljjarvis/netpyneunit.svg">
 </p>
 
 <!--   <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg"> -->
