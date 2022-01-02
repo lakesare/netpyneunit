@@ -4,7 +4,7 @@
 </h1>
 
 <p align="center">
-  <img alt="GitHub" src="https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square">
+  <img alt="GitHub" src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square">
   <img alt="GitHub" src="https://img.shields.io/github/issues/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://img.shields.io/github/issues-closed/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/lakesare/netpyneunit.svg">
