@@ -9,7 +9,6 @@
   <img alt="GitHub" src="https://img.shields.io/github/issues-closed/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg">
-
 </p>
 
 
@@ -20,6 +19,7 @@
   <a href="#Functionality">Functionality</a> •
   <a href="#Next-steps">Next steps</a> •
 </p>
+
 ## Overview
 
 Check out [google colab](https://colab.research.google.com/github/lakesare/netpyneunit/blob/main/docs/PDCM_example.ipynb) to see **NetpyneUnit** in action.
