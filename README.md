@@ -1,8 +1,7 @@
 
 <h1 align="center">
-  NetpyneUnit: 
-</h1>
-<h2 align="center"> SciUnit Tests for NetPyNE Models </h2>
+  NetpyneUnit:  SciUnit Tests for NetPyNE Models
+</h1> 
 <p align="center">
   <img alt="GitHub" src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square">
   <img alt="GitHub" src="https://img.shields.io/github/issues/lakesare/netpyneunit.svg">
