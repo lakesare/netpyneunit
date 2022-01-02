@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  NetpyneUnit: SciUnit Tests for NetPyNE Models
+  NetpyneUnit: <h2 align="center"> SciUnit Tests for NetPyNE Models </h2>
 </h1>
 
 <p align="center">
@@ -24,7 +24,7 @@
 
 ## Overview
 
-Check out [google colab](https://colab.research.google.com/github/lakesare/netpyneunit/blob/main/docs/PDCM_example.ipynb) to see **NetpyneUnit** in action.
+Check out [google colab](https://colab.research.google.com/github/russelljjarvis/netpyneunit/blob/main/docs/PDCM_example.ipyn) to see **NetpyneUnit** in action.
 
 ## Getting Started
 
