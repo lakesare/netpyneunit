@@ -142,10 +142,9 @@ We should check that we can serialize the scores for use in the **SciDash API** 
 ### Other
 
 <details>
-  <summary> Almost any paper describing a **NetPyNE** network </summary>
- should be able to benefit from **SciUnit**.
+  <summary> Generality of Approach used here <summary>
+Almost any paper describing a **NetPyNE** network should be able to benefit from **SciUnit**.
 Our role with **NetpyneUnit** is to standardize widespread tests, and to implement logic common to a lot of papers.
-
 
 For this to be possible, we should go from the ground up - read the paper, wrap the **NetPyNE** model into **SciUnit**, and see whether anything should be abstracted into a **NetpyneModel** subclass or a new **sciunit.Test**.
 
