@@ -1,10 +1,30 @@
-# NetpyneUnit: SciUnit Tests for NetPyNE Models
 
+<h1 align="center">
+  NetpyneUnit: SciUnit Tests for NetPyNE Models
+</h1>
+
+<p align="center">
+  <img alt="GitHub" src="https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square">
+  <img alt="GitHub" src="https://img.shields.io/github/issues/lakesare/netpyneunit.svg">
+  <img alt="GitHub" src="https://img.shields.io/github/issues-closed/lakesare/netpyneunit.svg">
+  <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/lakesare/netpyneunit.svg">
+  <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg">
+
+</p>
+
+
+<p align="center">
+  <a href="#Overview">Overview</a> •
+  <a href="#Getting-Started">Getting started</a> •
+  <a href="#Examples">Examples</a> •
+  <a href="#Functionality">Functionality</a> •
+  <a href="#Next-steps">Next steps</a> •
+</p>
 ## Overview
 
 Check out [google colab](https://colab.research.google.com/github/lakesare/netpyneunit/blob/main/docs/PDCM_example.ipynb) to see **NetpyneUnit** in action.
 
-## Getting started
+## Getting Started
 
 1. `git clone https://github.com/lakesare/netpyneunit.git`
 1. `pip install sciunit netpyne neuron`  
