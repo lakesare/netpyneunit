@@ -6,6 +6,7 @@ Check out [google colab](https://colab.research.google.com/github/lakesare/netpy
 
 ## Getting started
 
+1. git clone https://github.com/lakesare/netpyneunit.git
 1. `pip install sciunit netpyne neuron`  
 2. `cd netpyneunit`
 3. `pip install -e .` (this will install **NetpyneUnit** locally as if it's a real remote package, and you'll be able to import it from anywhere)
