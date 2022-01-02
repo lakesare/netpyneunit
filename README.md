@@ -66,9 +66,6 @@ Caching is necessary for **NetpyneUnit**:
 
 ## Next steps
 
-### Caching
-
-
 <details>
   <summary>Caching within **NetpyneUnit** works</summary>
 
