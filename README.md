@@ -8,9 +8,9 @@
   <img alt="GitHub" src="https://img.shields.io/github/issues/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://img.shields.io/github/issues-closed/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/lakesare/netpyneunit.svg">
-  <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg">
 </p>
 
+<!--   <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg"> -->
 
 <p align="center">
   <a href="#Overview">Overview</a> •
