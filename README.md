@@ -136,12 +136,12 @@ After this is done, we should be able to see a better (if any exists!) way to st
 
 We should check that we can serialize the scores for use in the **SciDash API** (this should be easy and possible work automatically).
 
-  </details>
+</details>
 
 ### Other
 
 <details>
-  <summary> Generality of Approach used here <summary>
+  <summary> Generality of Approach used here </summary>
     
 Almost any paper describing a **NetPyNE** network should be able to benefit from **SciUnit**.
 Our role with **NetpyneUnit** is to standardize widespread tests, and to implement logic common to a lot of papers.
