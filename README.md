@@ -36,6 +36,7 @@ Check out [google colab](https://colab.research.google.com/github/russelljjarvis
 5. `python examples/synchronization/synchronization_diagonal.py`
 
 If you get **3 Passes** on the **diagonal** (and fails everywhere else) - then you ran it successfully!
+  
 </details>
 
 ## Examples
@@ -86,11 +87,13 @@ NEURON: syntax error
  __dict__={}
           ^
 ```
+  
 Do not fret! This is merely a warning, and it shouldn't affect the results of your sim run.
 This happens because our `jsonpickle.encode(self)` slightly mutates our `simConfig` (and probably `netParams`) when it creates the hash of the model: it inserts undesirable attributes into every object, e.g. `__dict__` and `__getnewargs__`. 
 **NEURON** doesn't recognize these attributes, and raises the aforementioned warning.
 
 We should create a **custom jsonpickle handler** (place it along our other handlers) that will remove these foreign attrs.
+
 </details>
 
 <details>
@@ -108,6 +111,7 @@ Walk through **NetPyNE**'s `sim.load()` and `sim.saveData()` to make sure that *
 
 <details>
   <summary> Logging </summary>
+  
 By default, **NetPyNE** outputs a ton of logs on each run, and, with many sims per the program run, the **NetPyNE** output becomes incomprehensible, and the **SciUnit** output gets hard to find.  
 To deal with this, I created the logging PR to **NetPyNE**, and hopefully they should merge it soon ([https://github.com/Neurosim-lab/netpyne/pull/623](https://github.com/Neurosim-lab/netpyne/pull/623)).
 
@@ -119,6 +123,7 @@ Then, in your code, run:
 import logging
 logging.getLogger('netpyne').setLevel(logging.WARNING)
 ```
+  
 </details>
 
 
