@@ -11,7 +11,7 @@
 <!--   <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg"> -->
 
 <p align="center">
-  • <a href="#Overview">Overview</a> •
+  <a href="#Overview">Overview</a> •
   <a href="#Getting-Started">Getting started</a> •
   <a href="#Examples">Examples</a> •
   <a href="#Functionality">Functionality</a> •
