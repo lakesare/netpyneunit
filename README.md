@@ -5,18 +5,18 @@
 <p align="center">
   <img alt="GitHub" src="https://img.shields.io/github/issues/lakesare/netpyneunit.svg">
   <img alt="GitHub" src="https://img.shields.io/github/issues-closed/lakesare/netpyneunit.svg">
-  <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/russelljjarvis/netpyneunit.svg">
+  <img alt="GitHub" src="https://img.shields.io/github/commit-activity/m/lakesare/netpyneunit.svg">
 </p>
 
 <!--   <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg"> -->
 
 <p align="center">
-  <a href="#Overview">Overview</a> •
+  • <a href="#Overview">Overview</a> •
   <a href="#Getting-Started">Getting started</a> •
   <a href="#Examples">Examples</a> •
   <a href="#Functionality">Functionality</a> •
   <a href="#Next-steps">Next steps</a> •
-  <a href="#Other">Other</a> •
+  <a href="#Other">Other</a> 
 
 </p>
 
