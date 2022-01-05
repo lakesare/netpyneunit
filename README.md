@@ -54,8 +54,6 @@ Caching is necessary for **NetpyneUnit**:
 
 </details>
 
-## Next steps
-
 <details>
   <summary> Next steps </summary>
 
