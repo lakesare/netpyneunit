@@ -14,9 +14,7 @@
   <a href="#Overview">Overview</a> •
   <a href="#Getting-Started">Getting started</a> •
   <a href="#Examples">Examples</a> •
-  <a href="#Functionality">Functionality</a> •
   <a href="#Next-steps">Next steps</a> •
-  <a href="#Other">Other</a>
 
 </p>
 
