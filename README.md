@@ -10,14 +10,6 @@
 
 <!--   <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg"> -->
 
-<p align="center">
-  <a href="#Overview">Overview</a> •
-  <a href="#Getting-Started">Getting started</a> •
-  <a href="#Examples">Examples</a> •
-  <a href="#Next-steps">Next steps</a> •
-
-</p>
-
 ## Collab and Overview
 
 Check out [google colab](https://colab.research.google.com/github/russelljjarvis/netpyneunit/blob/main/docs/PDCM_example.ipyn) to see **NetpyneUnit** in action.
