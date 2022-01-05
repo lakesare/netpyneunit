@@ -27,8 +27,9 @@ Check out [google colab](https://colab.research.google.com/github/russelljjarvis
 ## Getting Started
 
 <details>
-  <summary>Install the Python module</summary>
+  <summary></summary>
 
+# Install the Python module
 1. `git clone https://github.com/lakesare/netpyneunit.git`
 2. `pip install sciunit netpyne neuron`  
 3. `cd netpyneunit`
