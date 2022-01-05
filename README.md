@@ -20,14 +20,14 @@
 
 </p>
 
-## Overview
+## Collab and Overview
 
 Check out [google colab](https://colab.research.google.com/github/russelljjarvis/netpyneunit/blob/main/docs/PDCM_example.ipyn) to see **NetpyneUnit** in action.
 
 ## Getting Started
 
 <details>
-  <h2> <summary> Installation Steps </summary> </h2>
+<summary> Installation Steps </summary> 
 
 # Install the Python module
 1. `git clone https://github.com/lakesare/netpyneunit.git`
@@ -44,10 +44,8 @@ If you get **3 Passes** on the **diagonal** (and fails everywhere else) - then y
 
 Please read the `README.md` in each subfolder of `/examples`.
 
-## Functionality
-
 <details>
-  <summary>Currently, the chief role of the `NetpyneBackend`</summary>
+  <summary> Functionality</summary>
 
 Currently, the chief role of the `NetpyneBackend` is to **run** the simulation in the NetPyNE-specific way, and to **cache** the results of our simulation run.  
 
