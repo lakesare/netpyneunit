@@ -101,7 +101,7 @@ Further more, if we have randomization, `allCells`  might be catching the attrib
 
 Walk through **NetPyNE**'s `sim.load()` and `sim.saveData()` to make sure that **NetpyneUnit**'s' `cache_to_results` and `results_to_cache()` aren't missing any code of importance.
 
-Logging 
+#### Logging 
   
 By default, **NetPyNE** outputs a ton of logs on each run, and, with many sims per the program run, the **NetPyNE** output becomes incomprehensible, and the **SciUnit** output gets hard to find.  
 To deal with this, I created the logging PR to **NetPyNE**, and hopefully they should merge it soon ([https://github.com/Neurosim-lab/netpyne/pull/623](https://github.com/Neurosim-lab/netpyne/pull/623)).
@@ -124,9 +124,6 @@ After this is done, we should be able to see a better (if any exists!) way to st
 #### SciDash 
 
 We should check that we can serialize the scores for use in the **SciDash API** (this should be easy and possible work automatically).
-
-
-#### Other
 
 #### Generality of Approach used here 
     
