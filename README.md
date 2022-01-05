@@ -10,7 +10,7 @@
 
 <!--   <img alt="GitHub" src="https://github.com/lakesare/netpyneunit/workflows/CI/badge.svg"> -->
 
-## Collab and Overview
+## Overview
 
 Check out [google colab](https://colab.research.google.com/github/russelljjarvis/netpyneunit/blob/main/docs/PDCM_example.ipyn) to see **NetpyneUnit** in action.
 
