@@ -27,7 +27,7 @@ Check out [google colab](https://colab.research.google.com/github/russelljjarvis
 ## Getting Started
 
 <details>
-  <summary> <h2> Getting Started </h2> </summary>
+  <h2> <summary> Installation Steps </summary> </h2>
 
 # Install the Python module
 1. `git clone https://github.com/lakesare/netpyneunit.git`
