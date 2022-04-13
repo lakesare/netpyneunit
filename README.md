@@ -2,7 +2,9 @@
 
 ## Overview
 
-Check out [google colab](https://colab.research.google.com/github/lakesare/netpyneunit/blob/main/docs/PDCM_example.ipynb) to see **NetpyneUnit** in action.
+Check out [google colab](https://colab.research.google.com/github/lakesare/netpyneunit/blob/main/docs/PDCM_example.ipynb) to see **NetpyneUnit** in action.  
+See [my blog post](https://lakesare.brick.do/testing-your-scientific-model-how-and-why-Y5Qvn1wKj35l) for the introduction to SciUnit and NetPyNE.
+
 
 ## Getting started
 
