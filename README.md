@@ -11,7 +11,7 @@ See [my blog post](https://lakesare.brick.do/testing-your-scientific-model-how-a
 1. `pip install sciunit netpyne neuron`  
 2. `cd netpyneunit`
 3. `pip install -e .` (this will install **NetpyneUnit** locally as if it's a real remote package, and you'll be able to import it from anywhere)
-4. `python examples/synchronization/synchronization_diagonal.py`
+4. `python examples/synchronization/synchronization.py`
 
 If you get **3 Passes** on the **diagonal** (and fails everywhere else) - then you ran it successfully!
 

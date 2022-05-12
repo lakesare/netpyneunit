@@ -9,7 +9,7 @@ Gili reviews multiple studies, and expects our **NetPyNE** network to have a par
 - **NMDA antagonist** should **decrease the synchrony**
 - **GABA agonist** should **increase the synchrony**  
 
-The only difference betweeen hers and our model is the number of neurons - she used **200** (see `'numCells'`), and we used **10** to speed up the model (hers runs for 10 minutes, ours for a few seconds).
+The only difference between hers and our model is the number of neurons - she used **200** (see `'numCells'`), and we used **10** to speed up the model (hers runs for 10 minutes, ours for a few seconds).
 Additionally, our model is beautified - if you'd like to read the proper description of the model and see the comments in code, please head to her post.
 
 ### Goal

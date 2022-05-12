@@ -7,6 +7,7 @@ from netpyneunit.models import NetpyneModel
 from netpyneunit.models.backends import NetpyneBackend
 
 import logging
+# This relies on https://github.com/Neurosim-lab/netpyne/pull/623.
 logging.getLogger('netpyne').setLevel(logging.WARNING)
 
 class ProducesSyncMeasure(sciunit.Capability): 
@@ -108,7 +109,7 @@ class NeuromodulatorModel(NetpyneModel, ProducesSyncMeasure):
       'recordStim': True,
       'recordStep': 0.1
     })
-    
+
     sim.initialize(netParams=netParams, simConfig=simConfig)
     sim.net.createPops()
     sim.net.createCells()

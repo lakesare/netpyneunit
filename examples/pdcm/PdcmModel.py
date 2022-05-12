@@ -40,7 +40,7 @@ class PdcmModel(NetpyneModel, ProducesMeanFiringRate):
     cfg.printPopAvgRates = False # Still prints?
     cfg.printRunTime = 1
 
-    ### Options to save memory in large-scale ismulations
+    ### Options to save memory in large-scale simulations
     cfg.gatherOnlySimData = False
     cfg.saveCellSecs      = False
     cfg.saveCellConns     = False
